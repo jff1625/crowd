@@ -1,0 +1,23 @@
+{
+  "name": "crowd",
+  "version": "0.0.0",
+  "description": "Crowd simulation",
+  "main": "src/index.js",
+  "author": "Jeff Boyes",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/jff1625/crowd.git"
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "^2.6.2",
+    "npx": "^10.2.0",
+    "prettier": "^1.14.2",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "pixi.js": "^4.8.1"
+  }
+}
