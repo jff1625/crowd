@@ -1,6 +1,4 @@
 import * as PIXI from 'pixi.js'
-//don't shit all over my nice clean global namespace you filty animal!
-//delete window.PIXI;
 
 const SPEED = 2;
 
@@ -41,7 +39,7 @@ export default class thing {
 
                 const speed = Math.min(this.distance(destination), SPEED);
                 const direction = Math.atan2(sprite.y - destination.y, sprite.x - destination.x);
-                
+
                 sprite.x -= speed * Math.cos(direction);
                 sprite.y -= speed * Math.sin(direction);
             });
