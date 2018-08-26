@@ -10,6 +10,11 @@
     "type" : "git",
     "url" : "https://github.com/jff1625/crowd.git"
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack-dev-server --open"
+  },
   "devDependencies": {
     "eslint-plugin-prettier": "^2.6.2",
     "npx": "^10.2.0",
