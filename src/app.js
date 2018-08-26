@@ -1,9 +1,8 @@
 import * as PIXI from 'pixi.js'
 
-//don't shit all over my nice clean global namespace!
+//don't shit all over my nice clean global namespace you filty animal!
 delete window.PIXI;
 
-debugger;
 // The application will create a renderer using WebGL, if possible,
 // with a fallback to a canvas render. It will also setup the ticker
 // and the root stage PIXI.Container
