@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import thing from './thing.js';
 import { Point } from 'pixi.js';
+import bunny from './bunny.png';
 
 
 //don't shit all over my nice clean global namespace you filty animal!
@@ -15,7 +16,15 @@ export default app;
 // The application will create a canvas element for you that you
 // can then insert into the DOM
 document.body.appendChild(app.view);
+let texture = PIXI.Texture.fromImage(bunny);
 
 let origin = new PIXI.Point(10, 10),
     destination = new PIXI.Point(Math.random() * app.screen.width, Math.random() * app.screen.height);
-let thing1 = new thing(app, origin, destination);
+let thing1 = new thing(texture, origin, destination, app);
+app.stage.addChild(thing1);
+
+origin = new PIXI.Point(630, 470),
+    destination = new PIXI.Point(Math.random() * app.screen.width, Math.random() * app.screen.height);
+let thing2 = new thing(texture, origin, destination, app);
+app.stage.addChild(thing2);
+

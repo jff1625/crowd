@@ -1,55 +1,39 @@
-import * as PIXI from 'pixi.js'
+import * as PIXI from 'pixi.js';
+import { distance, direction } from './utils.js';
 
-const SPEED = 2;
+const SPEED = 3;
 
-export default class thing {
-    constructor(app, origin, destination) {
-        this.app = app;
+export default class thing extends PIXI.Sprite{
+    constructor(texture, origin, destination, app) {
+        super(texture);
+        this.position = origin;
         this.destination = destination;
-        this.sprite;
-        this.init(origin);
+        this.anchor.x = 0.5;
+        this.anchor.y = 0.5;
+        this.init(app);
     }
 
-    init (origin) {
-        const app = this.app,
-            destination = this.destination;
+    init (app) {
+        // Listen for frame updates
+        app.ticker.add(() => {
+            // each frame we spin the bunny around a bit, for a laff
+            this.rotation += 0.01;
 
-        // load the texture we need
-        PIXI.loader
-            .add('bunny', 'bunny.png')
-            .load((loader, resources) => {
-            // This creates a texture from a 'bunny.png' image
-            const sprite = this.sprite = new PIXI.Sprite(resources.bunny.texture);
-            
-            // Setup the position of the bunny
-            sprite.x = origin.x;
-            sprite.y = origin.y;
+            //reduce speed when very close so as not to overshoot and wobble about
+            const speed = Math.min(this.distance(this.destination), SPEED);
+            const theDirection = this.direction(this.destination);
 
-            // Rotate around the center
-            sprite.anchor.x = 0.5;
-            sprite.anchor.y = 0.5;
-
-            // Add the bunny to the scene we are building
-            app.stage.addChild(sprite);
-
-            // Listen for frame updates
-            app.ticker.add(() => {
-                // each frame we spin the bunny around a bit
-                sprite.rotation += 0.01;
-
-                const speed = Math.min(this.distance(destination), SPEED);
-                const direction = Math.atan2(sprite.y - destination.y, sprite.x - destination.x);
-
-                sprite.x -= speed * Math.cos(direction);
-                sprite.y -= speed * Math.sin(direction);
-            });
+            this.x -= speed * Math.cos(theDirection);
+            this.y -= speed * Math.sin(theDirection);
         });
     }
 
-    distance (point) {
-        const sprite = this.sprite;
-        const a = sprite.x - point.x
-        var b = sprite.y - point.y;
-        return Math.sqrt( a*a + b*b );
+    distance(point) {
+        return distance(this.position, point);
     }
+
+    direction(point) {
+        return direction(this.position, point);
+    }
+          
 }
