@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import thing from './thing.js';
+import walker from './walker.js';
 import { Point } from 'pixi.js';
 import bunny from './bunny.png';
 
@@ -20,11 +20,11 @@ let texture = PIXI.Texture.fromImage(bunny);
 
 let origin = new PIXI.Point(10, 10),
     destination = new PIXI.Point(Math.random() * app.screen.width, Math.random() * app.screen.height);
-let thing1 = new thing(texture, origin, destination, app);
+let thing1 = new walker(texture, origin, destination, app);
 app.stage.addChild(thing1);
 
 origin = new PIXI.Point(630, 470),
     destination = new PIXI.Point(Math.random() * app.screen.width, Math.random() * app.screen.height);
-let thing2 = new thing(texture, origin, destination, app);
+let thing2 = new walker(texture, origin, destination, app);
 app.stage.addChild(thing2);
 
