@@ -1,8 +1,7 @@
-import * as PIXI from 'pixi.js';
-import walker from './walker.js';
-import { Point } from 'pixi.js';
-import bunny from './bunny.png';
-
+import * as PIXI from "pixi.js";
+import walker from "./walker.js";
+import { Point } from "pixi.js";
+import bunny from "./bunny.png";
 
 //don't shit all over my nice clean global namespace you filty animal!
 delete window.PIXI;
@@ -19,12 +18,17 @@ document.body.appendChild(app.view);
 let texture = PIXI.Texture.fromImage(bunny);
 
 let origin = new PIXI.Point(10, 10),
-    destination = new PIXI.Point(Math.random() * app.screen.width, Math.random() * app.screen.height);
+  destination = new PIXI.Point(
+    Math.random() * app.screen.width,
+    Math.random() * app.screen.height
+  );
 let thing1 = new walker(texture, origin, destination, app);
 app.stage.addChild(thing1);
 
-origin = new PIXI.Point(630, 470),
-    destination = new PIXI.Point(Math.random() * app.screen.width, Math.random() * app.screen.height);
+(origin = new PIXI.Point(630, 470)),
+  (destination = new PIXI.Point(
+    Math.random() * app.screen.width,
+    Math.random() * app.screen.height
+  ));
 let thing2 = new walker(texture, origin, destination, app);
 app.stage.addChild(thing2);
-
