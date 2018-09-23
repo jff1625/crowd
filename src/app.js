@@ -1,5 +1,5 @@
 import * as PIXI from "pixi.js";
-import walker from "./walker.js";
+import Walker from "./walker.js";
 import { Point } from "pixi.js";
 import bunny from "./bunny.png";
 
@@ -17,18 +17,33 @@ export default app;
 document.body.appendChild(app.view);
 let texture = PIXI.Texture.fromImage(bunny);
 
-let origin = new PIXI.Point(10, 10),
-  destination = new PIXI.Point(
-    Math.random() * app.screen.width,
-    Math.random() * app.screen.height
-  );
-let thing1 = new walker(texture, origin, destination, app);
-app.stage.addChild(thing1);
+const walkersList = [];
 
-(origin = new PIXI.Point(630, 470)),
-  (destination = new PIXI.Point(
-    Math.random() * app.screen.width,
-    Math.random() * app.screen.height
-  ));
-let thing2 = new walker(texture, origin, destination, app);
-app.stage.addChild(thing2);
+let origin = new PIXI.Point(10, 100),
+  destination = new PIXI.Point(600, 100);
+walkersList.push(new Walker(texture, origin, destination, app));
+
+origin = new PIXI.Point(300, 100);
+destination = new PIXI.Point(300, 100);
+walkersList.push(new Walker(texture, origin, destination, app));
+
+walkersList.forEach(walker => {
+  app.stage.addChild(walker);
+});
+
+app.ticker.add(update);
+
+function update() {
+  walkersList.forEach(walker => {
+    //do next step
+    walker.update();
+    //check for collision
+    walkersList.forEach(otherGuy => {
+      if (otherGuy !== walker) {
+        if (walker.hits(otherGuy.position)) {
+          console.log("hit");
+        }
+      }
+    });
+  });
+}

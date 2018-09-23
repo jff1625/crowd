@@ -3,7 +3,7 @@ import { distance, direction } from "./utils.js";
 
 const SPEED = 3;
 
-export default class walker extends PIXI.Sprite {
+export default class Walker extends PIXI.Sprite {
   constructor(texture, origin, destination, app) {
     super(texture);
     this.position = origin;
@@ -14,18 +14,23 @@ export default class walker extends PIXI.Sprite {
   }
 
   init(app) {
-    // Listen for frame updates
-    app.ticker.add(() => {
-      // each frame we spin the bunny around a bit, for a laff
-      this.rotation += 0.01;
+    //not much in here
+  }
 
-      //reduce speed when very close so as not to overshoot and wobble about
-      const speed = Math.min(this.distance(this.destination), SPEED);
-      const theDirection = this.direction(this.destination);
+  update() {
+    // each frame we spin the bunny around a bit, for a laff
+    this.rotation += 0.01;
 
-      this.x -= speed * Math.cos(theDirection);
-      this.y -= speed * Math.sin(theDirection);
-    });
+    //reduce speed when very close so as not to overshoot and wobble about
+    const speed = Math.min(this.distance(this.destination), SPEED);
+    const theDirection = this.direction(this.destination);
+
+    this.x -= speed * Math.cos(theDirection);
+    this.y -= speed * Math.sin(theDirection);
+  }
+
+  hits(point) {
+    return this.distance(point) < this.width;
   }
 
   //get the distance from here to a specified point
