@@ -6,13 +6,12 @@ import { distance, direction } from "./utils.js";
 jest.mock("./utils.js");
 
 import * as PIXI from "pixi.js";
-//jest.mock("pixi.js");
 
 import Walker from "./walker.js";
 
 describe("walker", () => {
   let w,
-    texture,
+    texture = PIXI.Texture.fromImage("./bunny.png"),
     origin = new PIXI.Point(1, 2),
     destination = new PIXI.Point(1, 2),
     app = new PIXI.Application();
@@ -28,5 +27,17 @@ describe("walker", () => {
 
   it("extends PIXI Sprite", () => {
     expect(w).toBeInstanceOf(PIXI.Sprite);
+  });
+
+  it("can detect hit at exact same point", () => {
+    const point = new PIXI.Point(1, 2);
+    distance.mockReturnValue(0);
+    expect(w.hits(point)).toBeTruthy();
+  });
+
+  it("can detect hit very near same point", () => {
+    const point = new PIXI.Point(1, 2);
+    distance.mockReturnValue(1);
+    expect(w.hits(point)).toBeTruthy();
   });
 });
