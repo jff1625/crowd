@@ -16,11 +16,19 @@ export default class Walker extends PIXI.Sprite {
     this.vy = 0;
     this.speed = 0;
     this.waypoints = [destination];
-    this.init(app);
+    this.app = app;
+    this.config = {
+      linearLookAhead: {
+        seconds: [1, 3],
+        move: Moves.WAYPOINT_EITHER
+      }
+    };
   }
 
-  init(app) {
-    //not much in here
+  setConfig(config) {
+    for (prop in config) {
+      this.config[prop] = config[prop];
+    }
   }
 
   update() {
@@ -45,6 +53,24 @@ export default class Walker extends PIXI.Sprite {
     this.vy = -this.speed * Math.sin(this.direction);
     this.x += this.vx;
     this.y += this.vy;
+  }
+
+  checkCollision(otherGuys) {
+    otherGuys.forEach((otherGuy, otherIndex) => {
+      if (this.hits(otherGuy.position)) {
+        console.log(`hitting: ${otherIndex}`);
+        this.evade(Moves.WAYPOINT_REVERSE, otherGuy);
+      }
+      //linearLookAhead
+      const lookAhead = this.config.linearLookAhead;
+      lookAhead.seconds.forEach(val => {
+        let framesAhead = val * this.app.ticker.FPS;
+        if (this.willHit(framesAhead, otherGuy.position)) {
+          console.log(`will hit ${val}sec: ${otherIndex}`);
+          this.evade(lookAhead.move, otherGuy);
+        }
+      });
+    });
   }
 
   hits(point) {

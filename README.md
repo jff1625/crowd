@@ -4,8 +4,11 @@ For a while now I've been fascinated by the way crowds of people can cross throu
 
 Checkpoints:
 -animation using pixi.js
+
 -collision detection
+
 -collision prediction
+
 -basic evasive manoeuvres
 
-Next: improve collision prediction
+Next: control panel - React?
