@@ -67,6 +67,7 @@ start();
 // start stop reset
 // create new walker
 // origin / destination
+// read walkers config?
 //
 // linearLookAhead disabled / array
 // linearLookAheadMove default WAYPOINT_EITHER

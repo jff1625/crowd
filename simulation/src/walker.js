@@ -26,7 +26,7 @@ export default class Walker extends PIXI.Sprite {
   }
 
   setConfig(config) {
-    for (prop in config) {
+    for (const prop in config) {
       this.config[prop] = config[prop];
     }
   }
