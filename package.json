@@ -1,42 +1,7 @@
 {
-  "name": "crowd",
-  "version": "0.0.0",
-  "description": "Crowd simulation",
-  "main": "src/index.js",
-  "author": "Jeff Boyes",
-  "license": "MIT",
-  "private": false,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jff1625/crowd.git"
-  },
-  "scripts": {
-    "test": "jest",
-    "build": "webpack",
-    "start": "webpack-dev-server --open"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-jest": "^23.6.0",
-    "babel-preset-env": "^1.7.0",
-    "eslint": "^5.6.0",
-    "eslint-plugin-prettier": "^2.6.2",
-    "file-loader": "^2.0.0",
-    "jest": "^23.6.0",
-    "jest-canvas-mock": "^1.1.0",
-    "prettier": "^1.14.2",
-    "regenerator-runtime": "^0.12.1",
-    "webpack": "^4.17.1",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8",
-    "window": "^4.2.5"
-  },
-  "dependencies": {
-    "pixi.js": "^4.8.1"
-  },
-  "jest": {
-    "setupFiles": [
-      "jest-canvas-mock"
-    ]
-  }
+  "private": true,
+  "workspaces": [
+    "simulation",
+    "control-panel"
+  ]
 }
